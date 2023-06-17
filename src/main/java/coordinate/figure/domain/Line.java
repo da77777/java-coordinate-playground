@@ -10,7 +10,7 @@ public class Line extends Figure {
   }
 
   @Override
-  public double getSize() {
+  public double getArea() {
     return super.getLineLength(points.get(0), points.get(1));
   }
 

@@ -4,19 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum FigureEnum {
-  LINE(2)
-  , TRIANGLE(3)
-  , RECTANGLE(4)
+  LINE(2, "두 점 사이 거리는 ")
+  , TRIANGLE(3, "삼각형 넓이는 ")
+  , RECTANGLE(4, "사각형 넓이는 ")
   ;
 
   private int pointCount;
+  private String areaSentence;
 
   public int getPointCount() {
     return pointCount;
   }
 
-  FigureEnum(int pointCount) {
+  public String getAreaSentence() {
+    return areaSentence;
+  }
+
+  FigureEnum(int pointCount, String areaSentence) {
     this.pointCount = pointCount;
+    this.areaSentence = areaSentence;
   }
 
   private static final Map<Integer, FigureEnum> figureEnumMap = new HashMap<>();
@@ -28,6 +34,5 @@ public enum FigureEnum {
   public static FigureEnum findByPointCount(int pointCount) {
     return figureEnumMap.get(pointCount);
   }
-
 
 }

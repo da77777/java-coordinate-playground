@@ -1,6 +1,5 @@
 package coordinate.view;
 
-import coordinate.figure.FigureEnum;
 import coordinate.figure.dto.FigureResult;
 import coordinate.point.domain.Point;
 import java.util.List;
@@ -10,18 +9,16 @@ public class ResultView {
   private ResultView() {
   }
 
-  public static void result(FigureResult result) {
-    FigureEnum figureEnum = result.getFigure();
-    if(figureEnum.equals(FigureEnum.LINE)) {
-      System.out.println("두 점 사이 거리는 " + result.getSize());
-    } else if (figureEnum.equals(FigureEnum.TRIANGLE)) {
-      System.out.println("삼각형 넓이는 "+ result.getSize());
-    } else if (figureEnum.equals(FigureEnum.RECTANGLE)) {
-      System.out.println("사각형 넓이는 "+ result.getSize());
-    }
+  public static void printResult(FigureResult result) {
+    drawCoordinates(result.getPoints());
+    result(result);
   }
 
-  public static void drawCoordinates(List<Point> points) {
+  private static void result(FigureResult result) {
+    System.out.println(result.getFigureEnum().getAreaSentence() + result.getSize());
+  }
+
+  private static void drawCoordinates(List<Point> points) {
     int limit = 24;
     char empty = ' ';
     char[][] grid = new char[limit + 1][limit + 1];
@@ -64,7 +61,7 @@ public class ResultView {
   }
 
   private static void lastLine(int limit) {
-    char widthLine = 'ㅡ';
+    char widthLine = '―';
 
     System.out.printf("%3s", "+");
     StringBuilder width = new StringBuilder();

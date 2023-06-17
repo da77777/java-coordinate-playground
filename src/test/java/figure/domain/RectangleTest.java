@@ -21,7 +21,7 @@ public class RectangleTest {
     }
 
     Rectangle rectangle = new Rectangle(points);
-    double result = rectangle.getSize();
+    double result = rectangle.getArea();
     assertEquals(96, result, 0.001);
 
   }

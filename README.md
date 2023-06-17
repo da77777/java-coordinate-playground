@@ -24,3 +24,7 @@ git checkout main // 기본 브랜치가 main인 경우
 git checkout -b 브랜치이름
 ex) git checkout -b apply-feedback
 ```
+---
+다형성 활용하기
+else 금지
+addPoints() -> List<Point> 객체 끌고다니지 않도록

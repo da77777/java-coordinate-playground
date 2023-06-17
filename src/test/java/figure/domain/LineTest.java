@@ -21,7 +21,7 @@ public class LineTest {
     }
 
     Line line = new Line(points);
-    double result = line.getSize();
+    double result = line.getArea();
     assertEquals(6.403124, result, 0.001);
 
   }

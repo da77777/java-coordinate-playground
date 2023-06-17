@@ -20,16 +20,15 @@ public class CoordinateApplication {
     inputView.inputPoints();
 
     List<Point> points = new ArrayList<>();
-    boolean success = false;
-    while(success == false) {
+    while(points.isEmpty()) {
       String[] splitAnswer = RepairString.removeBracketAndHyphen(inputView.inputAnswer());
-      success = pointService.addPoints(points, splitAnswer);
+      points = pointService.addPoints(splitAnswer);
     }
     inputView.close();
 
-    FigureResult result = figureService.getFigure(points);
-    ResultView.drawCoordinates(points);
-    ResultView.result(result);
+    FigureResult result = figureService.getFigureResult(points);
+    ResultView.printResult(result);
+
   }
 
 }

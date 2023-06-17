@@ -2,33 +2,34 @@ package coordinate.point.service;
 
 import coordinate.point.domain.Point;
 import coordinate.share.RepairString;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PointService {
 
-  public boolean addPoints(List<Point> points, String[] splitAnswer) {
-    if(!validPointCount(splitAnswer)){
-      return false;
+  public List<Point> addPoints(String[] splitAnswer) {
+    List<Point> points = new ArrayList<>();
+
+    if(!validPointCount(splitAnswer)) {
+      return points;
     }
 
-    for (String s : splitAnswer) {
-      addPoint(new Point(RepairString.removeComma(s)), points);
-    }
+    points = Arrays.stream(splitAnswer)
+            .map(s -> new Point(RepairString.removeComma(s)))
+            .filter(Point::hasValue)
+            .collect(Collectors.toList());
 
     if(points.size() != splitAnswer.length) {
-      return false;
-    }
-
-    return true;
-  }
-
-  public void addPoint(Point point, List<Point> points) {
-    if (point.hasValue()) {
-      points.add(point);
-    } else {
       points.clear();
+      return points;
     }
+
+    return points;
   }
+
 
   public boolean validPointCount(String[] splitAnswer) {
     if(splitAnswer.length < 2 || splitAnswer.length > 4) {

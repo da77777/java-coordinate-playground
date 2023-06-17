@@ -22,7 +22,7 @@ public class TriangleTest {
     }
 
     Triangle triangle = new Triangle(points);
-    double result = triangle.getSize();
+    double result = triangle.getArea();
     assertEquals(29.0, result, 0.001);
   }
 

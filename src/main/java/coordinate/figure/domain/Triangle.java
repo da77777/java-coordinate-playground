@@ -10,7 +10,7 @@ public class Triangle extends Figure {
   }
 
   @Override
-  public double getSize() {
+  public double getArea() {
     double x = getXLength();
     double y = getYLength();
     double z = getZLength();

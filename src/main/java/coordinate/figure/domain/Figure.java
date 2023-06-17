@@ -16,5 +16,5 @@ public abstract class Figure {
         + Math.pow((first.getY() - second.getY()), 2));
   }
 
-  protected abstract double getSize();
+  public abstract double getArea();
 }

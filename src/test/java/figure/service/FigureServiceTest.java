@@ -23,9 +23,9 @@ public class FigureServiceTest {
     for(int i = 0; i < value; i++) {
       points.add(new Point());
     }
-    FigureEnum figure = figureService.findFigure(points);
+    FigureEnum figureEnum = figureService.findFigureEnum(points);
 
-    assertEquals(expected, figure);
+    assertEquals(expected, figureEnum);
   }
 
   @ParameterizedTest
@@ -36,12 +36,11 @@ public class FigureServiceTest {
     String[] splitAnswer = RepairString.removeBracketAndHyphen(value);
     List<Point> points = new ArrayList<>();
     for (String s : splitAnswer) {
-      String[] split = s.split(",");
-      points.add(new Point(split));
+      points.add(new Point(RepairString.removeComma(s)));
     }
-    FigureResult result = figureService.getFigure(points);
+    double size = figureService.getSize(points);
 
-    assertEquals(expected, result.getSize(), 0.001);
+    assertEquals(expected, size, 0.001);
   }
 
 

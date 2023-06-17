@@ -1,6 +1,7 @@
 package coordinate.figure.service;
 
 import coordinate.figure.FigureEnum;
+import coordinate.figure.domain.Figure;
 import coordinate.figure.domain.Line;
 import coordinate.figure.domain.Rectangle;
 import coordinate.figure.domain.Triangle;
@@ -10,44 +11,35 @@ import java.util.List;
 
 public class FigureService {
 
-  public FigureResult getFigure(List<Point> points) {
+  public FigureResult getFigureResult(List<Point> points) {
 
-    FigureEnum figure = findFigure(points);
-    double size = getSize(points, figure);
+    FigureEnum figureEnum = findFigureEnum(points);
+    double size = getSize(points);
 
-    return new FigureResult(figure, size);
+    return new FigureResult(figureEnum, size, points);
   }
 
-  public FigureEnum findFigure(List<Point> points) {
-    int count = points.size();
-    return FigureEnum.findByPointCount(count);
+  public FigureEnum findFigureEnum(List<Point> points) {
+    return FigureEnum.findByPointCount(points.size());
   }
 
-  public double getSize(List<Point> points, FigureEnum figure) {
-    double size = 0;
-    if(figure.equals(FigureEnum.LINE)) {
-      size = getLineSize(points);
-    } else if(figure.equals(FigureEnum.RECTANGLE)) {
-      size = getRectangleSize(points);
-    } else if(figure.equals(FigureEnum.TRIANGLE)) {
-      size = getTriangleSize(points);
+  public double getSize(List<Point> points) {
+    Figure figure = createByPointsCount(points);
+    return figure.getArea();
+  }
+
+  public Figure createByPointsCount(List<Point> points) {
+    FigureEnum figureEnum = findFigureEnum(points);
+
+    if(figureEnum.equals(FigureEnum.LINE)) {
+      return new Line(points);
     }
-    return size;
-  }
 
-  private double getLineSize(List<Point> points) {
-    Line line = new Line(points);
-    return line.getSize();
-  }
+    if(figureEnum.equals(FigureEnum.TRIANGLE)) {
+      return new Triangle(points);
+    }
 
-  private double getRectangleSize(List<Point> points) {
-    Rectangle rectangle = new Rectangle(points);
-    return rectangle.getSize();
-  }
-
-  private double getTriangleSize(List<Point> points) {
-    Triangle triangle = new Triangle(points);
-    return triangle.getSize();
+    return new Rectangle(points);
   }
 
 }
