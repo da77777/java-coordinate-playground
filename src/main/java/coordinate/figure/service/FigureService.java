@@ -1,45 +1,35 @@
 package coordinate.figure.service;
 
 import coordinate.figure.FigureEnum;
-import coordinate.figure.domain.Figure;
-import coordinate.figure.domain.Line;
-import coordinate.figure.domain.Rectangle;
-import coordinate.figure.domain.Triangle;
+import coordinate.figure.domain.*;
 import coordinate.figure.dto.FigureResult;
 import coordinate.point.domain.Point;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FigureService {
 
+  private static Map<Integer, FigureCreator> figureBox = new HashMap<>();
+  static {
+    figureBox.put(FigureEnum.LINE.getPointCount(), Line::new); //Line::new : create 메서드 구현체
+    figureBox.put(FigureEnum.TRIANGLE.getPointCount(), Triangle::new);
+    figureBox.put(FigureEnum.RECTANGLE.getPointCount(), Rectangle::new);
+  }
+
   public FigureResult getFigureResult(List<Point> points) {
-
-    FigureEnum figureEnum = findFigureEnum(points);
-    double size = getSize(points);
-
-    return new FigureResult(figureEnum, size, points);
+    Figure figure = createFigure(points);
+    return new FigureResult(figure, points); // 확인
   }
 
-  public FigureEnum findFigureEnum(List<Point> points) {
-    return FigureEnum.findByPointCount(points.size());
-  }
-
-  public double getSize(List<Point> points) {
-    Figure figure = createByPointsCount(points);
-    return figure.getArea();
-  }
-
-  public Figure createByPointsCount(List<Point> points) {
-    FigureEnum figureEnum = findFigureEnum(points);
-
-    if(figureEnum.equals(FigureEnum.LINE)) {
-      return new Line(points);
+  public Figure createFigure(List<Point> points) {
+    Figure figure = null;
+    FigureCreator figureCreator = figureBox.get(points.size());
+    if(figureCreator != null) {
+      figure = figureCreator.create(points);
     }
-
-    if(figureEnum.equals(FigureEnum.TRIANGLE)) {
-      return new Triangle(points);
-    }
-
-    return new Rectangle(points);
+    return figure; //확인
   }
 
 }

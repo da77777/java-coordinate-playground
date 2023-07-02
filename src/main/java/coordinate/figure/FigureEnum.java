@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum FigureEnum {
-  LINE(2, "두 점 사이 거리는 ")
-  , TRIANGLE(3, "삼각형 넓이는 ")
-  , RECTANGLE(4, "사각형 넓이는 ")
+  LINE(2, "두 점 사이의 거리는 ")
+  , TRIANGLE(3, "삼각형의 넓이는 ")
+  , RECTANGLE(4, "사각형의 넓이는 ")
   ;
 
   private int pointCount;

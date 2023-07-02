@@ -1,30 +1,33 @@
 package coordinate.figure.dto;
 
 import coordinate.figure.FigureEnum;
+import coordinate.figure.domain.Figure;
 import coordinate.point.domain.Point;
 
 import java.util.List;
 
+import static coordinate.figure.FigureEnum.findByPointCount;
+
 public class FigureResult {
-  private FigureEnum figureEnum;
-  private double size;
+
+  private Figure figure;
   private List<Point> points;
 
-  public FigureResult(FigureEnum figureEnum, double size, List<Point> points) {
-    this.figureEnum = figureEnum;
-    this.size = size;
+  public FigureResult(Figure figure, List<Point> points) {
+    this.figure = figure;
     this.points = points;
   }
 
-  public FigureEnum getFigureEnum() {
-    return figureEnum;
-  }
-
-  public double getSize() {
-    return size;
+  public Figure getFigure() {
+    return figure;
   }
 
   public List<Point> getPoints() {
     return points;
   }
+
+  public FigureEnum getFigureEnum() {
+    return findByPointCount(points.size());
+  }
+
 }

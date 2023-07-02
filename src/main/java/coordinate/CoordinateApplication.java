@@ -26,7 +26,7 @@ public class CoordinateApplication {
     }
     inputView.close();
 
-    FigureResult result = figureService.getFigureResult(points);
+    FigureResult result = figureService.getFigureResult(points); //검증 필요
     ResultView.printResult(result);
 
   }

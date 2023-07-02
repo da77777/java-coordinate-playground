@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PointService {
+  private static final int MIN_POINT_COUNT = 2;
+  private static final int MAX_POINT_COUNT = 4;
 
   public List<Point> addPoints(String[] splitAnswer) {
     List<Point> points = new ArrayList<>();
@@ -32,8 +34,8 @@ public class PointService {
 
 
   public boolean validPointCount(String[] splitAnswer) {
-    if(splitAnswer.length < 2 || splitAnswer.length > 4) {
-      System.out.println("좌표는 2개 이상, 4개 이하로 입력해주세요.");
+    if(splitAnswer.length < MIN_POINT_COUNT || splitAnswer.length > MAX_POINT_COUNT) {
+      System.out.println("좌표는 " + MIN_POINT_COUNT + "개 이상, " + MAX_POINT_COUNT + "개 이하로 입력해주세요.");
       return false;
     }
     return true;

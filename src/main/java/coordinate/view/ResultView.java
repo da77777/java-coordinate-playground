@@ -15,7 +15,7 @@ public class ResultView {
   }
 
   private static void result(FigureResult result) {
-    System.out.println(result.getFigureEnum().getAreaSentence() + result.getSize());
+    System.out.println(result.getFigureEnum().getAreaSentence() + result.getFigure().getArea());
   }
 
   private static void drawCoordinates(List<Point> points) {
